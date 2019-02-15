@@ -1,0 +1,9 @@
+name: lx/lx-tools
+
+autoload:
+  psr-4:
+    lx\tools\: ''
+
+service:
+  class: lx\tools\Service
+  modules: module
