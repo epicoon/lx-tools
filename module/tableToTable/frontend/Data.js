@@ -8,30 +8,27 @@ const Data = {
 	 * */
 	setInfo(info) {
 		// Модели для таблиц, которые должны быть связаны
-		class ModelBase extends lx.Model{
+		class ModelBase extends lx.BindableModel{
 			constructor(data) {
 				super(data);
 				this.bonds = [];
 			}
-			static __afterDefinition() {}
 		}
 
 		// Модель для первой таблицы
 		class Model0 extends ModelBase{}
-		Model0.__setSchema(info[0].lxMerge({
+		Model0.initSchema(info[0].lxMerge({
 			selected: 'boolean',
 			suitable: 'boolean'
 		}));
-		Model0.makeBindable();
 		this.Model0 = Model0;
 
 		// Модель для второй таблицы
 		class Model1 extends ModelBase{}
-		Model1.__setSchema(info[1].lxMerge({
+		Model1.initSchema(info[1].lxMerge({
 			selected: 'boolean',
 			suitable: 'boolean'
 		}));
-		Model1.makeBindable();
 		this.Model1 = Model1;
 
 		// Управляющие сущности для массивов моделей

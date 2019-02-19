@@ -39,7 +39,7 @@ function fieldBlur() {
 		hide: ['selected'],
 		formModifier: (a)=> a.setField('selected', function(val) { this.fill(val ? 'green' : ''); }),
 		fieldsModifier: {
-			id: (a)=> a.setField('id', function(val) { this.text('#' + val); })
+			id: (a)=>a.setField('id', function(val) { this.text('#' + val); })
 						.align(lx.CENTER, lx.MIDDLE)
 						.click(clickModel),
 			suitable: (a)=> a.click(function() { Data.checkBond(this.parent.matrixModel()); }),
