@@ -1,6 +1,7 @@
 <?php
 return [
+	'respondentsNamespace' => 'lx\tools\module\tableToTable\backend',
 	'respondents' => [
-		'Resp' => 'lx\tools\module\tableToTable\backend\Resp'
+		'Resp' => 'Resp'
 	],
 ];
