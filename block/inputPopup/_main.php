@@ -19,8 +19,8 @@ $inputPopupStream->stream(['indent' => '10px', 'sizeBehavior' => lx\StreamPositi
 $inputPopupStream->begin();
 	$buttons = new lx\Box(['key' => 'buttons', 'height' => '35px']);
 	$buttons->grid(['step' => '10px', 'cols' => 2]);
-	new lx\Button(['parent' => $buttons, 'key' => 'ok', 'width' => 1, 'text' => 'OK']);
-	new lx\Button(['parent' => $buttons, 'key' => 'close', 'width' => 1, 'text' => 'Close']);
+	new lx\Button(['parent' => $buttons, 'key' => 'ok', 'width' => 1, 'text' => lx::i18n('OK')]);
+	new lx\Button(['parent' => $buttons, 'key' => 'close', 'width' => 1, 'text' => lx::i18n('Close')]);
 $inputPopupStream->end();
 
 $Block->hide();

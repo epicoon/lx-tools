@@ -21,8 +21,8 @@ $inputPopupStream->begin();
 
 	$buttons = new lx\Box(['key' => 'buttons', 'height' => '35px']);
 	$buttons->grid(['step' => '10px', 'cols' => 2]);
-	new lx\Button(['parent' => $buttons, 'key' => 'yes', 'width' => 1, 'text' => 'Yes']);
-	new lx\Button(['parent' => $buttons, 'key' => 'no', 'width' => 1, 'text' => 'No']);
+	new lx\Button(['parent' => $buttons, 'key' => 'yes', 'width' => 1, 'text' => lx::i18n('Yes')]);
+	new lx\Button(['parent' => $buttons, 'key' => 'no', 'width' => 1, 'text' => lx::i18n('No')]);
 $inputPopupStream->end();
 
 $Block->hide();
