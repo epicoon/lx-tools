@@ -2,15 +2,16 @@
  * Переключатель языка на основе lx.Dropbox, который хранит настройку языка в куках
  * */
 class LanguageSwitcher extends lx.Dropbox #lx:namespace lx.tools.widget {
+	#lx:const DEFAULT_AJAX = lx\tools\widget\LanguageSwitcher::DEFAULT_AJAX;
+
 	/**
 	 *
 	 * */
 	build(config) {
 		super.build(config);
-
 		this.addClass('lx-Dropbox');
-
 		this.options(#lx:load @lxData/languages);
+		this.ajaxMode = config.ajax || self::DEFAULT_AJAX;
 	}
 
 	/**
@@ -28,18 +29,28 @@ class LanguageSwitcher extends lx.Dropbox #lx:namespace lx.tools.widget {
 	 * */
 	actualizeLang() {
 		if (!this.value()) this.select(0);
-
-		var lang = lx.Cookie.get('lang');
-		if (!lang) {
-			lx.Cookie.set('lang', this.value());
-		}
+		lx.Cookie.set('lang', this.value());
 	}
 
 	/**
 	 *
 	 * */
 	static onChange() {
+		if (lx.Cookie.get('lang') == this.value()) return;
 		lx.Cookie.set('lang', this.value());
-		location.reload();
+
+		if (this.ajaxMode) {
+			var names = [];
+			lx.modules.each((module)=>names.push(module.name));
+			^self::ajaxGetMap(names):(res)=>{
+				//todo - трудность с переводами-шаблонами, в которых подменяются какие-то метки на вычисляемые в процессе рендериинга значения
+				console.log('TODO ajax mode');
+				console.log(names);
+				console.log(res);
+			};
+
+		} else {
+			location.reload();
+		}
 	}
 }
