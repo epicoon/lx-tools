@@ -12,7 +12,7 @@
 	* [inputPopup](#b-inputPopup)
 
 <a name="w-LanguageSwitcher"><h3>Виджет `LanguageSwitcher`</h3></a>
-Переключатель языка на основе lx\Dropbox, который хранит настройку языка в куках. Полное имя виджета с учетом пространства имен - для стороны сервера `lx\tools\widget\LanguageSwitcher`, для стороны клиента `lx.tools.widget.LanguageSwitcher`.<br>
+Переключатель языка на основе `lx\Dropbox`, который хранит настройку языка в куках. Полное имя виджета с учетом пространства имен - для стороны сервера `lx\tools\widget\LanguageSwitcher`, для стороны клиента `lx.tools.widget.LanguageSwitcher`.<br>
 Использует в качестве перечня доступных языков список, определяемый в файле приложения `lx/data/languages.php`.<br>
 Планируется ajax-режим переключения, пока не реализован.<br>
 Пример использования:

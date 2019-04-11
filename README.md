@@ -12,7 +12,7 @@ Content:
 	* [inputPopup](#b-inputPopup)
 
 <a name="w-LanguageSwitcher"><h3>Widget `LanguageSwitcher`</h3></a>
-This is switcher of current language based on lx\Dropbox. It holds language setting in cookie. Full widget name with namespace for server side is `lx\tools\widget\LanguageSwitcher`, for client side is `lx.tools.widget.LanguageSwitcher`.<br>
+This is switcher of current language based on `lx\Dropbox`. It holds language setting in cookie. Full widget name with namespace for server side is `lx\tools\widget\LanguageSwitcher`, for client side is `lx.tools.widget.LanguageSwitcher`.<br>
 As languages list it uses language array defined by file `lx/data/languages.php`.<br>
 Ajax switching mode is in planing, not implemented yet.<br>
 Example:
@@ -26,10 +26,10 @@ let widget = new lx.tools.widget.LanguageSwitcher(config);
 ```
 
 <a name="b-confirmPopup"><h3>Block `confirmPopup`</h3></a>
-This block is modal window. It may be opened with some question to comfirm.<br>
+This block is a modal window. It may be opened with some question to comfirm.<br>
 Example:
 ```php
-// Import this block in module view code
+// Import this block in a module view code
 $tools = lx::getService('lx/lx-tools');
 $tools->renderBlock('confirmPopup');
 ```
@@ -42,10 +42,10 @@ Module->confirmPopup.open(
 ```
 
 <a name="b-inputPopup"><h3>Block `inputPopup`</h3></a>
-This block is modal window. It may be opened with set of parameters to be entered by keyboard.<br>
+This block is a modal window. It may be opened with the set of parameters to be entered by keyboard.<br>
 Example:
 ```php
-// Import this block in module view code
+// Import this block in a module view code
 $tools = lx::getService('lx/lx-tools');
 $tools->renderBlock('inputPopup');
 ```
@@ -57,7 +57,7 @@ Module->inputPopup.open(
 	             // It takes an array of entered values as argument
 );
 
-// Еще один вариант вызова
+// One more way to use it
 Module->inputPopup.open(
 	paramNames,    // Array of the parameter names
 	defaultValues  // Array of parameter default values
