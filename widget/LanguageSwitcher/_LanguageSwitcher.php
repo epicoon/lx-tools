@@ -14,8 +14,9 @@ class LanguageSwitcher extends Dropbox {
 		parent::__construct($config);
 
 		$this->addClass('lx-Dropbox');
-		$this->options(\lx::$language->list);
-		$this->value(\lx::$language->current);
+		$language = \lx::$components->language;
+		$this->options($language->list);
+		$this->value($language->current);
 
 		if (isset($config['ajax'])) {
 			$this->ajaxMode = $config['ajax'];

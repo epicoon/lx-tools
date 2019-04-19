@@ -10,7 +10,7 @@ class LanguageSwitcher extends lx.Dropbox #lx:namespace lx.tools.widget {
 	build(config) {
 		super.build(config);
 		this.addClass('lx-Dropbox');
-		this.options(#lx:load @lxData/languages);
+		this.options(#lx:php(\lx::$components->language->list));
 		this.ajaxMode = config.ajax || self::DEFAULT_AJAX;
 	}
 

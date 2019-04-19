@@ -13,7 +13,7 @@ Content:
 
 <a name="w-LanguageSwitcher"><h3>Widget `LanguageSwitcher`</h3></a>
 This is switcher of current language based on `lx\Dropbox`. It holds language setting in cookie. Full widget name with namespace for server side is `lx\tools\widget\LanguageSwitcher`, for client side is `lx.tools.widget.LanguageSwitcher`.<br>
-As languages list it uses language array defined by file `lx/data/languages.php`.<br>
+As languages list it uses language array provided by application component `language`.<br>
 Ajax switching mode is in planing, not implemented yet.<br>
 Example:
 ```php
