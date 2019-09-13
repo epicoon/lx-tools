@@ -6,4 +6,4 @@ autoload:
 
 service:
   class: lx\tools\Service
-  modules: module
+  plugins: plugin

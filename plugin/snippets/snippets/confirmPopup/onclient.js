@@ -6,14 +6,14 @@ let onEnter = function() {
 		else if (onEnterCallback.isArray)
 			onEnterCallback[1].call(onEnterCallback[0]);
 	} 
-	Block.close();
+	Snippet.widget.close();
 };
 
 let onEscape = function() {
-	Block.close();
+	Snippet.widget.close();
 };
 
-Block.open = function(message, callback) {
+Snippet.widget.open = function(message, callback) {
 	this->stream->message.text(message);
 	this->stream->message.height(
 		this->stream->message->text.height('px') + 10 + 'px'
@@ -27,10 +27,10 @@ Block.open = function(message, callback) {
 	onEnterCallback = callback;
 };
 
-Block.close = function() {
+Snippet.widget.close = function() {
 	this.hide();
 	onEnterCallback = null;
 };
 
-Block->>yes.click(onEnter);
-Block->>no.click(()=> Block.close());
+Snippet->>yes.click(onEnter);
+Snippet->>no.click(()=> Snippet.widget.close());
