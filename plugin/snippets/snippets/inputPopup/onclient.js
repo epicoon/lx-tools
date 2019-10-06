@@ -3,7 +3,7 @@ let onEnterCallback = null;
 let onEnter = function() {
 	if (onEnterCallback) {
 		var values = [];
-		if (Snippet->stream.contain('r')) {
+		if (Snippet->stream.contains('r')) {
 			var rows = Snippet->stream->r;
 			if (rows) {
 				if (!rows.isArray) rows = [rows];
