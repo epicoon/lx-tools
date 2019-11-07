@@ -1,0 +1,9 @@
+class: lx\tools\plugin\webcli\Plugin
+
+rootSnippet: snippets/_root.js
+
+jsMain: frontend/_main.js
+jsBootstrap: frontend/_bootstrap.js
+
+respondents:
+  Respondent: backend\Respondent

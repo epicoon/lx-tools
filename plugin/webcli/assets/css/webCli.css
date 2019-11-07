@@ -1,0 +1,29 @@
+.lxWC-back {
+  font-family: Courier; /*Verdana;*/
+  tab-size: 4;
+  background-color: #272822;
+  color: #F8F8F2;
+}
+
+.lxWC-loc {
+	font-weight: bold;
+	color: #FFCF00;
+}
+
+.lxWC-command {
+	color: #FF9900;
+}
+
+.lxWC-msg_ {
+
+}
+.lxWC-msg_b {
+	font-weight: bold;
+}
+.lxWC-msg_u {
+	text-decoration: underline;	
+}
+.lxWC-msg_bu {
+	font-weight: bold;
+	text-decoration: underline;	
+}

@@ -1,0 +1,101 @@
+.lxcr-back {
+  font-family: Courier; /*Verdana;*/
+  tab-size: 4;
+  background-color: #272822;
+  color: #F8F8F2;
+}
+
+.lxcr-hint {
+  background-color: #66FF99 !important;
+}
+
+/* JavaScript */
+
+/* reserved */
+.lxcr-js-rsv {
+    font-weight: bold;
+    color: #DE3453;
+}
+
+/* symbols */
+.lxcr-js-smb {
+    color: #DE3453;
+}
+
+/* special */
+.lxcr-js-spc {
+    font-style: italic;
+    color: #AAAAFF;
+}
+
+/* function */
+.lxcr-js-fnc {
+    font-style: italic;
+    color: #80FFFF;
+}
+
+/* numbers */
+.lxcr-js-nmr {
+  color: #DE91FF;
+}
+
+/* string */
+.lxcr-js-str {
+  color: #E6DB5A !important;
+}
+
+/* comment */
+.lxcr-js-cmt {
+  color: #8D8872 !important;
+}
+
+
+/* PHP */
+
+/* reserved */
+.lxcr-php-rsv {
+    font-weight: bold;
+    color: #DE3427;
+}
+
+/* symbols */
+.lxcr-php-smb {
+    color: #DE3427;
+}
+
+/* fucntion */
+.lxcr-php-fnc {
+  color: #66D9D0;
+}
+
+/* constructors */
+.lxcr-php-cns {
+    font-style: italic;
+    color: #66D9D0;
+}
+
+/* variable */
+.lxcr-php-var {
+  font-style: italic;
+  color: #b0b0FF;
+}
+
+/* constant */
+.lxcr-php-cst {
+  color: #AE81FF;
+}
+
+/* numbers */
+.lxcr-php-nmr {
+  color: #DE91FF;
+}
+
+/* string */
+.lxcr-php-str {
+  color: #E6DB5A !important;
+}
+
+/* comment */
+.lxcr-php-cmt {
+  color: #8D8872 !important;
+}
