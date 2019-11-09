@@ -10,7 +10,8 @@ class Respondent extends \lx\Respondent {
 	 *
 	 * */
 	public function getCommandList() {
-		$list = \lx\Cli::COMMANDS;
+		$processor = new CliProcessor($this->app);
+		$list = $processor->getCommandsList();
 		unset($list['exit']);
 
 		$list = array_merge([
