@@ -6,27 +6,19 @@ use lx\CliProcessor;
 
 class Respondent extends \lx\Respondent {
 
-	/**
-	 *
-	 * */
 	public function getCommandList() {
 		$processor = new CliProcessor($this->app);
-		$list = $processor->getCommandsList();
+		$list = $processor->getCommandsList([
+			CliProcessor::COMMAND_TYPE_COMMON,
+			CliProcessor::COMMAND_TYPE_WEB_ONLY,
+		]);
 		unset($list['exit']);
 
-		$list = array_merge([
+		return array_merge([
 			'clear_console' => 'clear',
-			'auth_manage' => 'auth-manage',
-			'models_manage' => 'models-manage',
-			], $list
-		);
-
-		return $list;
+		], $list);
 	}
 
-	/**
-	 *
-	 * */
 	public function handleCommand($command, $args, $processParams, $serviceName, $pluginName) {
 		$service = null;
 		if ($serviceName) {
@@ -64,47 +56,6 @@ class Respondent extends \lx\Respondent {
 		return [
 			'success' => true,
 			'data' => $result
-		];
-	}
-
-	/**
-	 *
-	 * */
-	public function runAuthManage() {
-		if (!$this->app->authorizationGate) {
-			return [
-				'success' => false
-			];
-		}
-
-		$plugin = $this->app->authorizationGate->getManagePlugin();
-		$builder = new \lx\PluginBuildContext($plugin);
-		return [
-			'success' => true,
-			'data' => $builder->build(),
-		];
-	}
-
-	/**
-	 *
-	 * */
-	public function runModelsManage($serviceName) {
-		if (!$this->app->services->exists($serviceName)) {
-			return [
-				'success' => false,
-				'message' => "Service '$serviceName' not found",
-			];
-		}
-
-		//TODO - отцепить
-		$plugin = $this->app->getPlugin('lx/lx-model:modelManager');
-		$plugin->addRenderParams([
-			'service' => $serviceName
-		]);
-		$builder = new \lx\PluginBuildContext($plugin);
-		return [
-			'success' => true,
-			'data' => $builder->build(),
 		];
 	}
 }

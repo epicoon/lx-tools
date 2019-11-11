@@ -72,16 +72,6 @@ class Cli {
 			return;
 		}
 
-		if (this.checkCommand(command, 'models_manage')) {
-			this.runModelsManage();
-			return;
-		}
-
-		if (this.checkCommand(command, 'auth_manage')) {
-			this.runAuthManage();
-			return;
-		}
-
 		var commandType = this.identifyCommandType(command);
 		if (commandType === false) {
 			Console.outln("Unknown command '" + command +"'. Enter 'help' to see commands list");
@@ -155,6 +145,11 @@ class Cli {
 
 			result = result.data;
 
+			if (result.extensionData) {
+				this.handleExtendedCommand(result.extensionData);
+				return;
+			}
+
 			for (var key in result.params) {
 				var value = result.params[key];
 				this.processParams[key] = value;
@@ -192,71 +187,32 @@ class Cli {
 	}
 
 	/**
+	 * @param data
+	 */
+	handleExtendedCommand(data) {
+		if (data.message) {
+			Console.outln(data.message);
+			Console.outCache();
+		}
+		Console.input(this.getLocationText());
+		Console.checkCarret();
+
+		if (data.type == 'plugin') {
+			var ab = new lx.ActiveBox({
+				parent: lx.body,
+				geom: true,
+				header: data.header,
+				closeButton: {click:()=>ab.del()}
+			});
+			ab->body.injectPlugin(data.plugin);
+		}
+	}
+
+	/**
 	 *
 	 * */
 	clearConsole() {
 		Console.clear();
-	}
-
-	/**
-	 *
-	 * */
-	runModelsManage() {
-		var serviceName = this.getArg(0);
-		if (!serviceName) serviceName = this.getArg('s');
-		if (!serviceName) serviceName = this.service;
-		if (!serviceName) {
-			Console.outln('Please enter some service or write service name');
-			Console.outCache();
-			Console.input(this.getLocationText());
-			return;
-		}
-
-		^Respondent.runModelsManage(serviceName):(res)=>{
-			if (res.success === false) {
-				Console.outln(res.message);
-				Console.outCache();
-				Console.input(this.getLocationText());
-				return;
-			}
-
-			Console.outln('Loaded plugin for manage service "'+ serviceName +'" models');
-			Console.outCache();
-			Console.input(this.getLocationText());
-			Console.checkCarret();
-
-			var ab = new lx.ActiveBox({
-				parent: lx.body,
-				geom: true,
-				header: 'Service: ' + serviceName,
-				closeButton: {click:()=>ab.del()}
-			});
-			ab->body.injectPlugin(res.data);
-		};
-	}
-
-	/**
-	 * 
-	 * */
-	runAuthManage() {
-		^Respondent.runAuthManage():(res)=>{
-			if (res.success === false) {
-				Console.outln('Authorization gate does not exist');
-			} else {
-				Console.outln('Loaded plugin for auth manage');
-			}
-			Console.outCache();
-
-			Console.input(this.getLocationText());
-			Console.checkCarret();
-
-			var ab = new lx.ActiveBox({
-				parent: lx.body,
-				header: 'Authorization management',
-				closeButton: {click:()=>ab.del()}
-			});
-			ab->body.injectPlugin(res.data);
-		};
 	}
 
 	/**
