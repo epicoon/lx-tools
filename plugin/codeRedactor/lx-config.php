@@ -1,5 +1,6 @@
 <?php
 
 return [
-	'css' => 'assets/css'
+	'css' => 'assets/css',
+	'cacheType' => 'strict'
 ];
