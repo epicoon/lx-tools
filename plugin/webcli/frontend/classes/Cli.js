@@ -135,7 +135,7 @@ class Cli {
 	 *
 	 * */
 	handleCommand(command) {
-		^Respondent.handleCommand(command, this.args, this.processParams, this.service, this.plugin):(result)=>{
+		^Respondent.handleCommand(command, this.args, this.processParams, this.service, this.plugin).then((result)=>{
 			if (!result.success) {
 				Console.outln(result.data);
 				Console.outCache();
@@ -183,7 +183,7 @@ class Cli {
 				this.plugin = result.plugin;
 				Console.input(this.getLocationText());
 			}
-		};
+		});
 	}
 
 	/**

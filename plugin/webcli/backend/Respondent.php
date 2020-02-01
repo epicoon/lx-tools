@@ -7,7 +7,7 @@ use lx\CliProcessor;
 class Respondent extends \lx\Respondent {
 
 	public function getCommandList() {
-		$processor = new CliProcessor($this->app);
+		$processor = new CliProcessor();
 		$list = $processor->getCommandsList([
 			CliProcessor::COMMAND_TYPE_COMMON,
 			CliProcessor::COMMAND_TYPE_WEB_ONLY,
@@ -43,7 +43,7 @@ class Respondent extends \lx\Respondent {
 			}
 		}
 
-		$processor = new CliProcessor($this->app);
+		$processor = new CliProcessor();
 		$processor->setParams($processParams);
 		$result = $processor->handleCommand($command, $args, $service, $plugin);
 
