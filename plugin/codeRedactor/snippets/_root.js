@@ -10,6 +10,3 @@ new lx.Box({
 	style: {overflow: 'auto'},
 	geom: true
 });
-
-Plugin.clientParams.text = Plugin.renderParams.text;
-Plugin.clientParams.lang = Plugin.renderParams.lang;

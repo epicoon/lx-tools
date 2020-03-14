@@ -145,8 +145,8 @@ class Cli {
 
 			result = result.data;
 
-			if (result.extensionData) {
-				this.handleExtendedCommand(result.extensionData);
+			if (result.data && result.data.code == 'ext') {
+				this.handleExtendedCommand(result.data);
 				return;
 			}
 
@@ -204,7 +204,7 @@ class Cli {
 				header: data.header,
 				closeButton: {click:()=>ab.del()}
 			});
-			ab->body.injectPlugin(data.plugin);
+			ab->body.setPlugin(data.plugin);
 		}
 	}
 

@@ -1,7 +1,8 @@
 /**
- * @const lx.Plugin Plugin
- * @const lx.Snippet Snippet
- * */
+ * @const {lx.Application} App
+ * @const {lx.Plugin} Plugin
+ * @const {lx.Snippet} Snippet
+ */
 
 #lx:use lx.Button;
 

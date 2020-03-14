@@ -22,9 +22,8 @@ class Respondent extends \lx\Respondent {
 	public function handleCommand($command, $args, $processParams, $serviceName, $pluginName) {
 		$service = null;
 		if ($serviceName) {
-			try {
-				$service = $this->app->getService($serviceName);
-			} catch (\Exception $e) {
+			$service = $this->app->getService($serviceName);
+			if (!$service) {
 				return [
 					'success' => false,
 					'data' => 'Service name is wrong'
@@ -33,9 +32,8 @@ class Respondent extends \lx\Respondent {
 		}
 		$plugin = null;
 		if ($pluginName) {
-			try {
-				$plugin = $this->app->getPlugin($pluginName);
-			} catch (\Exception $e) {
+			$plugin = $this->app->getPlugin($pluginName);
+			if (!$plugin) {
 				return [
 					'success' => false,
 					'data' => 'Plugin name is wrong'
@@ -49,7 +47,6 @@ class Respondent extends \lx\Respondent {
 
 		$resService = $processor->getService();
 		$resPlugin = $processor->getPlugin();
-
 		$result['service'] = $resService ? $resService->name : null;
 		$result['plugin'] = $resPlugin ? $resPlugin->name : null;
 

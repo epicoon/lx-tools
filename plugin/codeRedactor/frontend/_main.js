@@ -120,5 +120,5 @@ redactor.chooseHint = function() {
 };
 
 
-redactor.init(Plugin.clientParams.lang || 'js');
-redactor.setText(Plugin.clientParams.text || '');
+redactor.init(Plugin.params.lang || 'js');
+redactor.setText(Plugin.params.text || '');
