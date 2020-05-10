@@ -6,7 +6,7 @@
 
 #lx:use lx.Button;
 
-App.useI18n({service: 'lx/lx-tools'});
+App.useI18n({service: 'lx/tools'});
 
 Snippet.onload(()=>{#lx:require onclient;});
 

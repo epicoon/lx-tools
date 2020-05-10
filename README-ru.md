@@ -1,6 +1,6 @@
 [English version (Английская версия)](https://github.com/epicoon/lx-tools/blob/master/README.md)
 
-## Сервис `lx-tools` для lx-платформы
+## Сервис `lx/tools` для lx-платформы
 
 Содержит виджеты и сниппеты, расширяющие базовый набор.
 
@@ -22,7 +22,7 @@
 Создаем редактор в сниппете какого-то своего плагина:
 ```js
 let $redactorBox = new lx.Box({key: 'redactorBox'});
-redactorBox.setPlugin('lx/lx-tools:codeRedactor', {
+redactorBox.setPlugin('lx/tools:codeRedactor', {
 	lang: 'php',
 	text: '$test = 1;',
 });
@@ -43,7 +43,7 @@ redactor.lang = 'js';
 Плагин, эмулирующий работу CLI в браузере.<br>
 Можно добавить в проект роут, например такой:
 ```php
-	'web-cli' => ['service-plugin' => 'lx/lx-tools:webcli', 'on-mode' => ['dev', 'test']],
+	'web-cli' => ['service-plugin' => 'lx/tools:webcli', 'on-mode' => ['dev', 'test']],
 ```
 Тогда по URL `your.domain/web-cli` сможем работать в командной строке платформы прямо из браузера.
 
@@ -65,7 +65,7 @@ let widget = new lx.tools.widget.LanguageSwitcher(config);
 ```js
 // В коде сниппета импортируем
 Snippet.addSnippet({
-	plugin: 'lx/lx-tools:snippets',
+	plugin: 'lx/tools:snippets',
 	snippet: 'confirmPopup'
 });
 ```
@@ -83,7 +83,7 @@ Plugin->confirmPopup.open(
 ```js
 // В коде сниппета импортируем
 Snippet.addSnippet({
-	plugin: 'lx/lx-tools:snippets',
+	plugin: 'lx/tools:snippets',
 	snippet: 'inputPopup'
 });
 ```

@@ -1,6 +1,6 @@
 [Russian version (Русская версия)](https://github.com/epicoon/lx-tools/blob/master/README-ru.md)
 
-## Service `lx-tools` for lx-platform
+## Service `lx/tools` for lx-platform
 
 It contains plugins, widgets and snippets extending the basic set.
 
@@ -22,7 +22,7 @@ Example:<br>
 Create an editor in a view of some plugin:
 ```js
 let redactorBox = new lx.Box({key: 'redactorBox'});
-redactorBox.setPlugin('lx/lx-tools:codeRedactor', {
+redactorBox.setPlugin('lx/tools:codeRedactor', {
 	lang: 'php',
 	text: '$test = 1;',
 });
@@ -43,7 +43,7 @@ redactor.lang = 'js';
 Plugin that emulates the work of the CLI in the browser.<br>
 You can add a route to your project:
 ```php
-	'web-cli' => ['service-plugin' => 'lx/lx-tools:webcli', 'on-mode' => ['dev', 'test']],
+	'web-cli' => ['service-plugin' => 'lx/tools:webcli', 'on-mode' => ['dev', 'test']],
 ```
 Then by the URL `your.domain/web-cli` you can work on the platform command line directly from the browser.
 
@@ -65,7 +65,7 @@ Example:
 ```js
 // Import this snippet in a plugin snippet code
 Snippet.addSnippet({
-	plugin: 'lx/lx-tools:snippets',
+	plugin: 'lx/tools:snippets',
 	snippet: 'confirmPopup'
 });
 ```
@@ -83,7 +83,7 @@ Example:
 ```js
 // Import this snippet in a plugin snippet code
 Snippet.addSnippet({
-	plugin: 'lx/lx-tools:snippets',
+	plugin: 'lx/tools:snippets',
 	snippet: 'inputPopup'
 });
 ```
