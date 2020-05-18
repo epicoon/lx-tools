@@ -1,1 +1,6 @@
-{"lx.tools.widget.LanguageSwitcher":{"name":"lx.tools.widget.LanguageSwitcher","path":"vendor\/lx\/tools\/widget\/LanguageSwitcher\/_LanguageSwitcher.js"}}
+{
+    "lx.tools.widget.LanguageSwitcher": {
+        "name": "lx.tools.widget.LanguageSwitcher",
+        "path": "vendor\/lx\/tools\/widget\/LanguageSwitcher\/_LanguageSwitcher.js"
+    }
+}
