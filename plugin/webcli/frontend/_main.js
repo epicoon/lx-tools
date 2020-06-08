@@ -7,4 +7,4 @@
 
 Console.init(Plugin->console);
 
-^Respondent.getCommandList().then((list)=>new Cli(list));
+^Respondent.getCommandList().then(res=>new Cli(res));
