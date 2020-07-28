@@ -8,7 +8,7 @@
 
 App.useI18n({service: 'lx/tools'});
 
-Snippet.onload(()=>{#lx:require onclient;});
+Snippet.onLoad(()=>{#lx:require onclient;});
 
 Snippet.widget.setGeom(['0%', '0%', '100%', '100%']);
 Snippet.widget.style('z-index', 1000);
