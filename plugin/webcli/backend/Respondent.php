@@ -8,18 +8,21 @@ class Respondent extends \lx\Respondent {
 
 	public function getCommandList() {
 		$processor = new CliProcessor();
-		$list = $processor->getCommandsList([
+		$list = $processor->getCommandsList()->getSubList([
 			CliProcessor::COMMAND_TYPE_COMMON,
 			CliProcessor::COMMAND_TYPE_WEB_ONLY,
 		]);
-		unset($list['exit']);
+		$list->removeCommand('\q');
 
 		return array_merge([
-			'clear_console' => 'clear',
-		], $list);
+		    [
+                'command' => ['clear'],
+                'description' => 'Clear console',
+            ],
+		], $list->toArray());
 	}
 
-	public function handleCommand($command, $args, $processParams, $serviceName, $pluginName) {
+	public function handleCommand($command, $inputString, $processParams, $serviceName, $pluginName) {
 		$service = null;
 		if ($serviceName) {
 			$service = $this->app->getService($serviceName);
@@ -41,8 +44,9 @@ class Respondent extends \lx\Respondent {
 			}
 		}
 
-		$processor = new CliProcessor();
-		$processor->setParams($processParams);
+        $processor = new CliProcessor();
+        list($__pass, $args) = $processor->parseInput($inputString);
+        $processor->setParams($processParams);
 		$result = $processor->handleCommand($command, $args, $service, $plugin);
 
 		$resService = $processor->getService();

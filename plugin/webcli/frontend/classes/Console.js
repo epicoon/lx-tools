@@ -37,6 +37,8 @@ class Console {
 			+ text
 			+ '</span><span class="'+this.commandCss+'" lxwc-type="command" lxwc-row="'+this.currentRow+'"> </span>'
 		);
+
+		this.checkCarret();
 	}
 
 	static out(text, decor = '') {
@@ -116,6 +118,8 @@ class Console {
 	}
 
 	static checkCarret() {
+		if (!this.carret.isActive()) return;
+
 		this.carret.reset();
 		if (this.carret.anchor.tag.getAttribute('lxwc-type') == 'loc' || this.carret.anchor.tag.getAttribute('lxwc-row') != this.currentRow) {
 			var tag = new Tag(this._c.lastChild);
@@ -173,8 +177,6 @@ class Console {
 	static onKeyup(e) {
 		if (e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'ArrowUp' || e.key == 'ArrowDown' || e.key == 'Enter') {
 			Console.commandPressed = false;
-			Console.checkCarret();
-			Console.carret.reset();
 		}
 	}
 

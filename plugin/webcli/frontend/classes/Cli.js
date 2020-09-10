@@ -5,7 +5,7 @@ class Cli {
 		this.service = null;
 		this.plugin = null;
 
-		this.args = [];
+		this.inputString = '';
 		this.commandsHistory = [];
 		this.commandsHistoryIndex = 0;
 
@@ -56,31 +56,30 @@ class Cli {
 			this.commandsHistory.push(input);
 			this.commandsHistoryIndex = this.commandsHistory.len;
 		}
-		var inputData = this.parseInput(input),
-			command = inputData[0];
-		this.args = inputData[1];
 
-		if (this.checkCommand(command, 'help')) {
+		var command = this.identifyCommandKey(input);
+		this.inputString = input;
+
+		if (command == '\\h' || command == 'help') {
 			this.showCommands();
 			Console.input(this.getLocationText());
 			return;
 		}
 
-		if (this.checkCommand(command, 'clear_console')) {
+		if (command == 'clear') {
 			this.clearConsole();
 			Console.input(this.getLocationText());
 			return;
 		}
 
-		var commandType = this.identifyCommandType(command);
-		if (commandType === false) {
+		if (!this.validateCommand(command)) {
 			Console.outln("Unknown command '" + command +"'. Enter 'help' to see commands list");
 			Console.outCache();
 			Console.input(this.getLocationText());
 			return;
 		}
 
-		this.handleCommand(commandType);
+		this.handleCommand(command);
 	}
 
 	/**
@@ -135,7 +134,7 @@ class Cli {
 	 *
 	 * */
 	handleCommand(command) {
-		^Respondent.handleCommand(command, this.args, this.processParams, this.service, this.plugin).then((result)=>{
+		^Respondent.handleCommand(command, this.inputString, this.processParams, this.service, this.plugin).then((result)=>{
 			if (!result.success) {
 				Console.outln(result.data);
 				Console.outCache();
@@ -219,14 +218,13 @@ class Cli {
 	 * 
 	 * */
 	showCommands() {
-		var commands = this.commandList;
 		var arr = [];
-		for (var key in commands) {
-			var str = key.ucFirst();
-			str = str.replace(/_/g, ' ');
-			var commandsStr = commands[key].isArray ? commands[key].join(', ') : commands[key];
-			arr.push([str, commandsStr]);
-		}
+		this.commandList.each(item=>{
+			arr.push([
+				item.description,
+				item.command.isArray ? item.command.join(', ') : item.command
+			]);
+		});
 
 		arr = Console.normalizeTable(arr, '.');
 		for (var i in arr) {
@@ -242,94 +240,17 @@ class Cli {
 	 * Методы, обслуживающие базовую работу командной строки
 	 *************************************************************************************************************************/
 
-	/**
-	 * Получить агрумент по ключу (или индексу, если массив аргументов перечислимый)
-	 * */
-	getArg(key) {
-		if (key.isArray) {
-			for (var i in key) {
-				var item = key[i];
-				if (this.args[item] !== undefined) {
-					return this.args[item];
-				}
-			}
-			return null;
-		}
-
-		if (this.args[key] !== undefined) {
-			return this.args[key];
-		}
-		return null;
+	identifyCommandKey(input) {
+		var arr = input.split(' ');
+		var command = arr.shift();
+		return command;
 	}
 
-	/**
-	 * Вычленяет из введенного текста имя команды и аргументы:
-	 * Или так:
-	 * lx-cli<app>: command arg1 arg2 "arg3 by several words"
-	 * Или так:
-	 * lx-cli<app>: command -k=arg1 --key="arg2 by several words"
-	 * Но не перечислением и ключами одновременно (в этом случае ключи учтутся, перечисленные будут проигнорированы)
-	 * @param $input string - строка консольного ввода
-	 * */
-	parseInput(input) {
-		var matches = input.match(/".*?"/g);
-		var line = input.replace(/".*?"/g, '№№№'); // preg_replace('/".*?"/', '№№№', $input);
-		var arr = line.split(' ');
-
-		if (matches && matches.len) {
-			var counter = 0;
-			arr.each((value, i)=>{
-				if (!value.match(/№№№/)) return;
-				arr[i] = value.replace(/№№№/, matches[counter++]);
-			});
-		}
-
-		var command = arr.shift(),
-			counted = [],
-			assoc = [];
-
-		arr.each((item)=>{
-			if (item[0] != '-') {
-				counted.push(item);
-				return;
-			}
-			var temp = item.split('=');
-			//todo - если в значении текст, а в тексте символ равно?
-			var key = temp[0].match(/^-+?([^-].*)$/)[1];
-			var value = temp[1].match(/^"*?([^"]?.*[^"]?)"*$/)[1];
-			assoc[key] = value;
-		});
-
-		var args = assoc.lxEmpty ? counted : assoc;
-		return [command, args];
-	}
-
-	/**
-	 *
-	 * */
-	identifyCommandType(command) {
-		var keywords = this.commandList;
-		for (var key in keywords) {
-			var value = keywords[key];
-			if (!value.isArray) value = [value];
-			for (var i in value) {
-				var commandName = value[i];
-				if (command == commandName) {
-					return key;
-				}
-			}
-		}
+	validateCommand(commandName) {
+		for (var i=0, l=this.commandList.len; i<l; i++)
+			if (this.commandList[i].command.contains(commandName))
+				return true;
 		return false;
-	}
-
-	/**
-	 * Проверяет соответствует ли команда какой-то категории
-	 * @param command string - команда, уже вычлененная из строки консольного ввода
-	 * */
-	checkCommand(command, key) {
-		var keywords = this.commandList[key];
-		if (keywords.isArray) return (keywords.contains(command));
-		return command == keywords;
 	}
 
 	/**
@@ -351,15 +272,16 @@ class Cli {
 		var matches = [];
 
 		var commands = this.commandList;
-		for (var key in commands) {
-			var keywords = commands[key];
-			if (!keywords.isArray) keywords = [keywords];
-			for (var i in keywords) {
-				var command = keywords[i];
-				if (command != text) {
+		for (let key in commands) {
+			let command = commands[key].command;
+			if (!command.isArray) command = [command];
+
+			for (let i in command) {
+				let commandName = command[i];
+				if (commandName != text) {
 					var reg = new RegExp('^' + text);
-					if (command.match(reg)) {
-						matches.push(command);
+					if (commandName.match(reg)) {
+						matches.push(commandName);
 					}
 				}
 			}

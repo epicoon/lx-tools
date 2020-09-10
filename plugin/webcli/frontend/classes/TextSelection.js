@@ -7,6 +7,10 @@ class TextSelection {
 
 		this.reset();
 	}
+	
+	isActive() {
+		return (this.anchor !== null);
+	}
 
 	/**
 	 * Актуализировать данные
