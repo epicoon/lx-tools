@@ -2,5 +2,5 @@
 
 return [
 	'css' => 'assets/css',
-	'cacheType' => 'strict'
+	'cacheType' => 'on'
 ];
