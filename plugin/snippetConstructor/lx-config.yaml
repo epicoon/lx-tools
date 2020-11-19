@@ -9,7 +9,7 @@ jsBootstrap: frontend/_bootstrap.js
 images: assets/images
 css: assets/css
 
-cacheType: smart
+cacheType: none
 
 respondents:
   Respondent: backend\Respondent
