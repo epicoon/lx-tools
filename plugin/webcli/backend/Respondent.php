@@ -4,9 +4,10 @@ namespace lx\tools\plugin\webcli\backend;
 
 use lx\CliProcessor;
 
-class Respondent extends \lx\Respondent {
-
-	public function getCommandList() {
+class Respondent extends \lx\Respondent
+{
+	public function getCommandList(): array
+    {
 		$processor = new CliProcessor();
 		$list = $processor->getCommandsList()->getSubList([
 			CliProcessor::COMMAND_TYPE_COMMON,
@@ -22,7 +23,14 @@ class Respondent extends \lx\Respondent {
 		], $list->toArray());
 	}
 
-	public function handleCommand($command, $inputString, $processParams, $serviceName, $pluginName) {
+	public function handleCommand(
+	    string $command, 
+        string $inputString, 
+        array $processParams, 
+        string $serviceName, 
+        string $pluginName
+    ): array
+    {
 		$service = null;
 		if ($serviceName) {
 			$service = $this->app->getService($serviceName);

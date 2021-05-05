@@ -2,6 +2,7 @@
 
 namespace lx\tools\plugin\snippets;
 
-class Plugin extends \lx\Plugin {
+class Plugin extends \lx\Plugin
+{
 
 }
