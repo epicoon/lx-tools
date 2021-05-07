@@ -3,10 +3,11 @@
 namespace lx\tools\plugin\webcli\backend;
 
 use lx\CliProcessor;
+use lx\ResponseInterface;
 
 class Respondent extends \lx\Respondent
 {
-	public function getCommandList(): array
+	public function getCommandList(): ResponseInterface
     {
 		$processor = new CliProcessor();
 		$list = $processor->getCommandsList()->getSubList([
@@ -15,21 +16,23 @@ class Respondent extends \lx\Respondent
 		]);
 		$list->removeCommand('\q');
 
-		return array_merge([
-		    [
-                'command' => ['clear'],
-                'description' => 'Clear console',
-            ],
-		], $list->toArray());
+		return $this->prepareResponse(
+		    array_merge([
+                [
+                    'command' => ['clear'],
+                    'description' => 'Clear console',
+                ],
+    		], $list->toArray())
+        );
 	}
 
 	public function handleCommand(
 	    string $command, 
         string $inputString, 
         array $processParams, 
-        string $serviceName, 
-        string $pluginName
-    ): array
+        ?string $serviceName,
+        ?string $pluginName
+    ): ResponseInterface
     {
 		$service = null;
 		if ($serviceName) {
@@ -62,9 +65,6 @@ class Respondent extends \lx\Respondent
 		$result['service'] = $resService ? $resService->name : null;
 		$result['plugin'] = $resPlugin ? $resPlugin->name : null;
 
-		return [
-			'success' => true,
-			'data' => $result
-		];
+		return $this->prepareResponse($result);
 	}
 }
